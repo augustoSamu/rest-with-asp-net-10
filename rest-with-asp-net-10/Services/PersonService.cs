@@ -44,10 +44,10 @@ namespace rest_with_asp_net_10.Services
         {
             return new Person
             {
-                Id = new Random().Next(1, 1000),
-                FirstName = $"John{i}",
-                LastName = $"Doe{i}",
-                Address = $"123 Main{i}",
+                Id = i,
+                FirstName = $"John {i}",
+                LastName = $"Doe {i}",
+                Address = $"123 Main {i}",
                 Gender = i % 2 == 0 ? "Male" : "Female"
             };
         }
