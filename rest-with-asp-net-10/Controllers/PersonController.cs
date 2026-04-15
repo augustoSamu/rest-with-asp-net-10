@@ -44,7 +44,7 @@ namespace rest_with_asp_net_10.Controllers
             return Ok(personCreated);
         }
 
-        [HttpPost]
+        [HttpPut]
         public IActionResult Update([FromBody] Person person)
         {
             if (person is null)

@@ -13,20 +13,20 @@ namespace rest_with_asp_net_10.Services
         {
             return new List<Person>
             {
-                MockPerson(new Random().Next(1, 1000)),
-                MockPerson(new Random().Next(1, 1000)),
-                MockPerson(new Random().Next(1, 1000)),
-                MockPerson(new Random().Next(1, 1000)),
-                MockPerson(new Random().Next(1, 1000)),
-                MockPerson(new Random().Next(1, 1000)),
-                MockPerson(new Random().Next(1, 1000)),
-                MockPerson(new Random().Next(1, 1000))
+                MockPerson(1),
+                MockPerson(2),
+                MockPerson(3),
+                MockPerson(4),
+                MockPerson(5),
+                MockPerson(6),
+                MockPerson(7),
+                MockPerson(8)
             };
         }
 
         public Person Create(Person person)
         {
-            person.Id = new Random().Next(1, 1000);
+            person.Id = new Random().Next(9);
             return person;
         }
 
