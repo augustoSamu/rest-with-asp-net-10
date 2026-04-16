@@ -1,9 +1,17 @@
 ﻿using rest_with_asp_net_10.Model;
+using rest_with_asp_net_10.Model.Context;
 
 namespace rest_with_asp_net_10.Services
 {
     public class PersonService : IPersonService
     {
+        private MSSQLContext _context;
+
+        public PersonService(MSSQLContext context)
+        {
+            _context = context;
+        }
+
         public Person FindById(int id)
         {
             return MockPerson(id);
@@ -11,17 +19,7 @@ namespace rest_with_asp_net_10.Services
         
         public List<Person> FindAll()
         {
-            return new List<Person>
-            {
-                MockPerson(1),
-                MockPerson(2),
-                MockPerson(3),
-                MockPerson(4),
-                MockPerson(5),
-                MockPerson(6),
-                MockPerson(7),
-                MockPerson(8)
-            };
+            return _context.Persons.ToList();
         }
 
         public Person Create(Person person)
