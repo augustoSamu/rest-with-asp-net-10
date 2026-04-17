@@ -14,7 +14,7 @@ namespace rest_with_asp_net_10.Services
 
         public Person FindById(int id)
         {
-            return MockPerson(id);
+            return _context.Persons.Find(id);
         }
         
         public List<Person> FindAll()
@@ -24,31 +24,34 @@ namespace rest_with_asp_net_10.Services
 
         public Person Create(Person person)
         {
-            person.Id = new Random().Next(9);
+            _context.Add(person);
+            _context.SaveChanges();
+
             return person;
         }
 
         public Person Update(Person person)
         {
+            var existingPerson = _context.Persons.Find(person.Id);
+
+            if (existingPerson is null)
+                return null;
+
+            _context.Entry(existingPerson).CurrentValues.SetValues(person);
+            _context.SaveChanges();
+
             return person;
         }
 
         public void Delete(int id)
         {
+            var existingPerson = _context.Persons.Find(id);
 
+            if (existingPerson is null)
+                return;
+
+            _context.Remove(existingPerson);
+            _context.SaveChanges();
         }
-
-        private Person MockPerson(int i)
-        {
-            return new Person
-            {
-                Id = i,
-                FirstName = $"John {i}",
-                LastName = $"Doe {i}",
-                Address = $"123 Main {i}",
-                Gender = i % 2 == 0 ? "Male" : "Female"
-            };
-        }
-
     }
 }
