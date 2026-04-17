@@ -12,14 +12,14 @@ namespace rest_with_asp_net_10.Services
             _context = context;
         }
 
-        public Person FindById(int id)
-        {
-            return _context.Persons.Find(id);
-        }
-        
         public List<Person> FindAll()
         {
             return _context.Persons.ToList();
+        }
+
+        public Person FindById(int id)
+        {
+            return _context.Persons.Find(id);
         }
 
         public Person Create(Person person)
