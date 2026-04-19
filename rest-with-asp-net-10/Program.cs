@@ -1,5 +1,6 @@
-using rest_with_asp_net_10.Configurations;
-using rest_with_asp_net_10.Services;
+using rest_with_asp_net_10.Configuration;
+using rest_with_asp_net_10.Repository;
+using rest_with_asp_net_10.Service;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +12,7 @@ builder.Services.AddControllers();
 
 builder.Services.AddDatabaseConfiguration(builder.Configuration);
 builder.Services.AddScoped<IPersonService, PersonService>();
+builder.Services.AddScoped<IPersonRepository, PersonRepository>();
 
 var app = builder.Build();
 

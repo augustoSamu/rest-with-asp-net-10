@@ -1,13 +1,13 @@
 ﻿using rest_with_asp_net_10.Model;
 using rest_with_asp_net_10.Model.Context;
 
-namespace rest_with_asp_net_10.Services
+namespace rest_with_asp_net_10.Repository
 {
-    public class PersonService : IPersonService
+    public class PersonRepository : IPersonRepository
     {
         private MSSQLContext _context;
 
-        public PersonService(MSSQLContext context)
+        public PersonRepository(MSSQLContext context)
         {
             _context = context;
         }

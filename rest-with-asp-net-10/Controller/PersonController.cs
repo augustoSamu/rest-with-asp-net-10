@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using rest_with_asp_net_10.Model;
-using rest_with_asp_net_10.Services;
+using rest_with_asp_net_10.Service;
 
-namespace rest_with_asp_net_10.Controllers
+namespace rest_with_asp_net_10.Controller
 {
     [ApiController]
     [Route("[controller]")]

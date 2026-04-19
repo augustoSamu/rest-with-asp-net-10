@@ -1,6 +1,6 @@
 ﻿using Serilog;
 
-namespace rest_with_asp_net_10.Configurations
+namespace rest_with_asp_net_10.Configuration
 {
     public static class LoggingConfig
     {
