@@ -34,7 +34,7 @@ namespace rest_with_asp_net_10.Controllers
             if (person is null)
             {
                 _logger.LogWarning("Person with ID {id} not found", id);
-                return NotFound("Person not found.");
+                return NotFound();
             }
 
             return Ok(person);
