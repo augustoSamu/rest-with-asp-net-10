@@ -1,10 +1,15 @@
-﻿using Microsoft.Data.SqlClient;
+﻿using EvolveDb;
+using Microsoft.Data.SqlClient;
+using Serilog;
 
 namespace rest_with_asp_net_10.Configuration
 {
     public static class EvolveConfig
     {
-        public static IServiceCollection AddEvolveCondiguration(this IServiceCollection services, IConfiguration configuration, IWebHostEnvironment environment)
+        public static IServiceCollection AddEvolveCondiguration(
+            this IServiceCollection services,
+            IConfiguration configuration,
+            IWebHostEnvironment environment)
         {
             if (!environment.IsDevelopment())
             {
@@ -18,18 +23,21 @@ namespace rest_with_asp_net_10.Configuration
                 throw new ArgumentNullException("Connection string 'MSSQLServerConnection' not found in configuration.");
             }
 
-
             try
             {
-                using var evolve = new SqlConnection(connectionString);
-                var evolve = new Evolve.Evolve(evolve, msg => Log.Information(msg))
+                using var evolveConnection = new SqlConnection(connectionString);
+                var evolve = new Evolve(evolveConnection, msg => Log.Information(msg))
                 {
-                    Locations = new[] { "db/migrations" },
-                    IsEraseDisabled = true,
+                    Locations = new List<string> { "db/migrations", "db/seeds" },
+                    IsEraseDisabled = true
                 };
+                evolve.Migrate();
             }
-            catch (Exception ex) { }
-
+            catch (Exception ex)
+            {
+                Log.Error(ex, "An error occurred while applying database migrations");
+                throw;
+            }
 
             return services;
         }

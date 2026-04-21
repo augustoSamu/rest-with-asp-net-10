@@ -9,6 +9,8 @@ builder.AddLoggingConfiguration();
 builder.Services.AddControllers();
 
 builder.Services.AddDatabaseConfiguration(builder.Configuration);
+builder.Services.AddEvolveCondiguration(builder.Configuration, builder.Environment);
+
 builder.Services.AddScoped<IPersonService, PersonService>();
 builder.Services.AddScoped<IPersonRepository, PersonRepository>();
 
