@@ -11,9 +11,9 @@ namespace rest_with_asp_net_10.Configuration
                 return services;
             }
 
-            var connectionSting = configuration["ConnectionStrings:MSSQLServerConnection"];
+            var connectionString = configuration["ConnectionStrings:MSSQLServerConnection"];
 
-            if (connectionSting == null)
+            if (connectionString == null)
             {
                 throw new ArgumentNullException("Connection string 'MSSQLServerConnection' not found in configuration.");
             }

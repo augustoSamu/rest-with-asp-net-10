@@ -7,15 +7,15 @@ namespace rest_with_asp_net_10.Configuration
     {
         public static IServiceCollection AddDatabaseConfiguration(this IServiceCollection services, IConfiguration configuration)
         {
-            var connectionSting = configuration["ConnectionStrings:MSSQLServerConnection"];
+            var connectionString = configuration["ConnectionStrings:MSSQLServerConnection"];
 
-            if (connectionSting == null)
+            if (connectionString == null)
             {
                 throw new ArgumentNullException("Connection string 'MSSQLServerConnection' not found in configuration.");
             }
 
             services.AddDbContext<MSSQLContext>(options =>
-                options.UseSqlServer(connectionSting));
+                options.UseSqlServer(connectionString));
             return services;
         }
     }
