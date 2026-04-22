@@ -11,20 +11,20 @@ namespace rest_with_asp_net_10.Model
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
+        [Required]
         [Column("title", TypeName = "varchar(MAX)")]
-        [MaxLength]
         public string Title { get; set; }
 
+        [Required]
         [Column("author", TypeName = "varchar(MAX)")]
-        [MaxLength]
         public string Author { get; set; }
 
         [Required]
-        [Column("price", TypeName = "decimal(18,2)")]
-        public double Price { get; set; }
+        [Column("price")]
+        public decimal Price { get; set; }
 
         [Required]
-        [Column("launch_date", TypeName = "datetime2(6)")]
+        [Column("launch_date")]
         public DateTime LauchDate { get; set; }
     }
 }
