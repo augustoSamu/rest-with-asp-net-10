@@ -45,12 +45,12 @@ namespace rest_with_asp_net_10.Repository
 
         public void Delete(int id)
         {
-            var existingPerson = _context.Persons.Find(id);
+            var person = _context.Persons.Find(id);
 
-            if (existingPerson is null)
+            if (person is null)
                 return;
 
-            _context.Remove(existingPerson);
+            _context.Remove(person);
             _context.SaveChanges();
         }
     }

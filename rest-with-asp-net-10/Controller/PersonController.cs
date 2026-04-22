@@ -24,7 +24,6 @@ namespace rest_with_asp_net_10.Controller
             return Ok(_service.FindAll());
         }
 
-
         [HttpGet("{id}")]
         public IActionResult FindById(int id)
         {
@@ -47,11 +46,10 @@ namespace rest_with_asp_net_10.Controller
             if (person is null)
             {
                 _logger.LogError("Failed to create person");
-                return BadRequest("Person must be real.");
+                return BadRequest();
             }
 
             var personCreated = _service.Create(person);
-
             return Ok(personCreated);
         }
 
@@ -64,11 +62,11 @@ namespace rest_with_asp_net_10.Controller
 
             if (personUpdate is null)
             {
-                _logger.LogError("Failed to updade person with ID {id}", person.Id);
-                return BadRequest("Person must be real.");
+                _logger.LogError("Failed to update person with ID {id}", person.Id);
+                return BadRequest();
             }
             
-            _logger.LogDebug("Person updated successfully with ID {id}", person.Id);
+            _logger.LogDebug("Persocn updated successfully with ID {id}", person.Id);
             return Ok(personUpdate);
         }
 
