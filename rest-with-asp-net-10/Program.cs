@@ -12,7 +12,9 @@ builder.Services.AddDatabaseConfiguration(builder.Configuration);
 builder.Services.AddEvolveCondiguration(builder.Configuration, builder.Environment);
 
 builder.Services.AddScoped<IPersonService, PersonService>();
+builder.Services.AddScoped<IBookService, BookService>();
 builder.Services.AddScoped<IPersonRepository, PersonRepository>();
+builder.Services.AddScoped<IBookRepository, BookRepository>();
 
 var app = builder.Build();
 
