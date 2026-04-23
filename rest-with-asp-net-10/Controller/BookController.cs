@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using rest_with_asp_net_10.Model;
+using rest_with_asp_net_10.Domain;
 using rest_with_asp_net_10.Service;
 
 namespace rest_with_asp_net_10.Controller
@@ -18,34 +18,45 @@ namespace rest_with_asp_net_10.Controller
         }
 
         [HttpGet]
-        public IActionResult FindAll()
+        public IActionResult GetAll()
         {
-            _logger.LogInformation("Finding all books.");
-            return Ok(_service.FindAll());
+            _logger.LogInformation("Getting all books.");
+
+            List<Book> books = _service.GetAll();
+
+            if (!books.Any())
+            {
+                _logger.LogInformation("No books found.");
+                return NoContent();
+            }
+
+            return Ok(books);
         }
 
         [HttpGet("{id}")]
-        public IActionResult FindById(int id)
+        public IActionResult GetById(int id)
         {
-            _logger.LogInformation("Finding book with ID {id}", id);
-            var person = _service.FindById(id);
+            _logger.LogInformation("Getting book with ID {id}.", id);
 
-            if (person is null)
+            Book? book = _service.GetById(id);
+
+            if (book is null)
             {
-                _logger.LogWarning("Book with ID {id} not found", id);
+                _logger.LogWarning("Book with ID {id} not found.", id);
                 return NotFound();
             }
 
-            return Ok(person);
+            return Ok(book);
         }
 
         [HttpPost]
         public IActionResult Create([FromBody] Book book)
         {
             _logger.LogInformation("Creating new book with title {title}", book.Title);
+
             if (book is null)
             {
-                _logger.LogError("Failed to create book");
+                _logger.LogError("Failed to create book.");
                 return BadRequest();
             }
 
@@ -56,17 +67,22 @@ namespace rest_with_asp_net_10.Controller
         [HttpPut]
         public IActionResult Update([FromBody] Book book)
         {
-            _logger.LogInformation("Updating book with ID {id}", book.Id);
-
-            var bookUpdated = _service.Update(book);
+            _logger.LogInformation("Updating book with ID {id}.", book.Id);
 
             if (book is null)
             {
-                _logger.LogError("Failed to update book with ID {id}", book.Id);
+                _logger.LogError("Failed to update book.");
                 return BadRequest();
             }
 
-            _logger.LogDebug("Book updated successfully with ID {id}", book.Id);
+            var bookUpdated = _service.Update(book);
+
+            if (bookUpdated is null)
+            {
+                _logger.LogError("Failed to found book.");
+                return NotFound();
+            }
+
             return Ok(bookUpdated);
         }
 
@@ -74,9 +90,16 @@ namespace rest_with_asp_net_10.Controller
         public IActionResult Delete(int id)
         {
             _logger.LogInformation("Deleting book with ID {id}", id);
-            _service.Delete(id);
 
-            _logger.LogDebug("Book deleted successfully with ID {id}", id);
+            Book? book = _service.GetById(id);
+
+            if (book is null)
+            {
+                _logger.LogError("Failed to delete book with ID {id}", id);
+                return NotFound();
+            }
+
+            _service.Delete(id);
             return NoContent();
         }
     }

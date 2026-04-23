@@ -1,25 +1,25 @@
-﻿using rest_with_asp_net_10.Model;
+﻿using rest_with_asp_net_10.Domain;
 using rest_with_asp_net_10.Repository;
 
 namespace rest_with_asp_net_10.Service
 {
     public class PersonService : IPersonService
     {
-        private IPersonRepository _repository;
+        private Repository<Person> _repository;
 
-        public PersonService(IPersonRepository repository)
+        public PersonService(Repository<Person> repository)
         {
             _repository = repository;
         }
 
-        public List<Person> FindAll()
+        public List<Person> GetAll()
         {
-            return _repository.FindAll();
+            return _repository.GetAll();
         }
 
-        public Person FindById(int id)
+        public Person GetById(int id)
         {
-            return _repository.FindById(id);
+            return _repository.GetById(id);
         }
 
         public Person Create(Person person)

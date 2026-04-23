@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using rest_with_asp_net_10.Model;
+using rest_with_asp_net_10.Domain;
 using rest_with_asp_net_10.Service;
 
 namespace rest_with_asp_net_10.Controller
@@ -18,21 +18,31 @@ namespace rest_with_asp_net_10.Controller
         }
 
         [HttpGet]
-        public IActionResult FindAll()
+        public IActionResult GetAll()
         {
-            _logger.LogInformation("Finding all persons.");
-            return Ok(_service.FindAll());
+            _logger.LogInformation("Getting all persons.");
+
+            List<Person> persons = _service.GetAll();
+
+            if (!persons.Any())
+            {
+                _logger.LogInformation("No persons found.");
+                return NoContent();
+            }
+
+            return Ok(persons);
         }
 
         [HttpGet("{id}")]
-        public IActionResult FindById(int id)
+        public IActionResult GetById(int id)
         {
-            _logger.LogInformation("Finding person with ID {id}", id);
-            var person = _service.FindById(id);
+            _logger.LogInformation("Getting person with ID {id}.", id);
+
+            Person? person = _service.GetById(id);
 
             if (person is null)
             {
-                _logger.LogWarning("Person with ID {id} not found", id);
+                _logger.LogWarning("Person with ID {id} not found.", id);
                 return NotFound();
             }
 
@@ -42,14 +52,15 @@ namespace rest_with_asp_net_10.Controller
         [HttpPost]
         public IActionResult Create([FromBody] Person person)
         {
-            _logger.LogInformation("Creating new person with name {firstName}", person.FirstName);
+            _logger.LogInformation("Creating new person with name {firstName}.", person.FirstName);
+
             if (person is null)
             {
-                _logger.LogError("Failed to create person");
+                _logger.LogError("Failed to create person.");
                 return BadRequest();
             }
 
-            var personCreated = _service.Create(person);
+            Person personCreated = _service.Create(person);
             return Ok(personCreated);
         }
 
@@ -58,15 +69,20 @@ namespace rest_with_asp_net_10.Controller
         {
             _logger.LogInformation("Updating person with ID {id}", person.Id);
 
-            var personUpdate = _service.Update(person);
+            if (person is null)
+            {
+                _logger.LogError("Failed to update person.");
+                return BadRequest();
+            }
+
+            Person? personUpdate = _service.Update(person);
 
             if (personUpdate is null)
             {
-                _logger.LogError("Failed to update person with ID {id}", person.Id);
-                return BadRequest();
+                _logger.LogError("Failed to found person.");
+                return NotFound();
             }
-            
-            _logger.LogDebug("Persocn updated successfully with ID {id}", person.Id);
+
             return Ok(personUpdate);
         }
 
@@ -74,9 +90,16 @@ namespace rest_with_asp_net_10.Controller
         public IActionResult Delete(int id)
         {
             _logger.LogInformation("Deleting person with ID {id}", id);
-            _service.Delete(id);
 
-            _logger.LogDebug("Person deleted successfully with ID {id}", id);
+            Person? person = _service.GetById(id);
+
+            if (person is null)
+            {
+                _logger.LogError("Failed to delete person with ID {id}", id);
+                return NotFound();
+            }
+
+            _service.Delete(id);
             return NoContent();
         }
     }

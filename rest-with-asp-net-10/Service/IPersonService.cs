@@ -1,12 +1,12 @@
-﻿using rest_with_asp_net_10.Model;
+﻿using rest_with_asp_net_10.Domain;
 
 namespace rest_with_asp_net_10.Service
 {
     public interface IPersonService
     {
-        Person FindById(int id);
+        List<Person> GetAll();
 
-        List<Person> FindAll();
+        Person GetById(int id);
 
         Person Create(Person person);
 

@@ -1,24 +1,24 @@
-﻿using rest_with_asp_net_10.Model;
+﻿using rest_with_asp_net_10.Domain;
 using rest_with_asp_net_10.Repository;
 
 namespace rest_with_asp_net_10.Service
 {
     public class BookService : IBookService
     {
-        private readonly IBookRepository _repository;
+        private readonly Repository<Book> _repository;
 
-        public BookService(IBookRepository repository)
+        public BookService(Repository<Book> repository)
         {
             _repository = repository;
         }
-        public List<Book> FindAll()
+        public List<Book> GetAll()
         {
-            return _repository.FindAll();
+            return _repository.GetAll();
         }
 
-        public Book FindById(int id)
+        public Book GetById(int id)
         {
-            return _repository.FindById(id);
+            return _repository.GetById(id);
         }
 
         public Book Create(Book book)

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace rest_with_asp_net_10.Model
+namespace rest_with_asp_net_10.Domain
 {
     [Table("book")]
     public class Book
