@@ -5,9 +5,9 @@ namespace rest_with_asp_net_10.Service
 {
     public class BookService : IBookService
     {
-        private readonly Repository<Book> _repository;
+        private readonly IRepository<Book> _repository;
 
-        public BookService(Repository<Book> repository)
+        public BookService(IRepository<Book> repository)
         {
             _repository = repository;
         }

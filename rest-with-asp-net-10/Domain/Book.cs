@@ -20,7 +20,7 @@ namespace rest_with_asp_net_10.Domain
         public string Author { get; set; }
 
         [Required]
-        [Column("price")]
+        [Column("price", TypeName = "decimal(18,2)")]
         public decimal Price { get; set; }
 
         [Required]

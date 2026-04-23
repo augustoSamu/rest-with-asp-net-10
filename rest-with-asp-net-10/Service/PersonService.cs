@@ -5,9 +5,9 @@ namespace rest_with_asp_net_10.Service
 {
     public class PersonService : IPersonService
     {
-        private Repository<Person> _repository;
+        private IRepository<Person> _repository;
 
-        public PersonService(Repository<Person> repository)
+        public PersonService(IRepository<Person> repository)
         {
             _repository = repository;
         }

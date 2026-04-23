@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using rest_with_asp_net_10.Model;
+using rest_with_asp_net_10.Domain;
 
 namespace rest_with_asp_net_10.Context
 {
