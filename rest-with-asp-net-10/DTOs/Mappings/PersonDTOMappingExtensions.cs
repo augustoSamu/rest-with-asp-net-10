@@ -14,7 +14,8 @@ namespace rest_with_asp_net_10.DTOs.Mappings
                 Id = person.Id,
                 FirstName = person.FirstName,
                 LastName = person.LastName,
-                Address = person.Address
+                Address = person.Address,
+                Gender = person.Gender
             };
         }
 
@@ -29,6 +30,7 @@ namespace rest_with_asp_net_10.DTOs.Mappings
                 FirstName = personDTO.FirstName,
                 LastName = personDTO.LastName,
                 Address = personDTO.Address,
+                Gender = personDTO.Gender
             };
         }
 
@@ -42,7 +44,8 @@ namespace rest_with_asp_net_10.DTOs.Mappings
                 Id = p.Id,
                 FirstName = p.FirstName,
                 LastName = p.LastName,
-                Address = p.Address
+                Address = p.Address,
+                Gender = p.Gender
             }).ToList();
         }
     }
