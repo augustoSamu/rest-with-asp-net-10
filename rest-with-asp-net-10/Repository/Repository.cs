@@ -14,7 +14,7 @@ namespace rest_with_asp_net_10.Repository
             _dbSet = _context.Set<T>();
         }
 
-        public List<T> GetAll()
+        public IEnumerable<T> GetAll()
         {
             return _dbSet.ToList();
         }

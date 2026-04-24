@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using rest_with_asp_net_10.Domain;
+using rest_with_asp_net_10.DTOs;
 using rest_with_asp_net_10.Service;
 
 namespace rest_with_asp_net_10.Controller
@@ -22,15 +22,15 @@ namespace rest_with_asp_net_10.Controller
         {
             _logger.LogInformation("Getting all persons.");
 
-            List<Person> persons = _service.GetAll();
+            IEnumerable<PersonDTO> personsDTO = _service.GetAll();
 
-            if (!persons.Any())
+            if (!personsDTO.Any())
             {
                 _logger.LogInformation("No persons found.");
                 return NoContent();
             }
 
-            return Ok(persons);
+            return Ok(personsDTO);
         }
 
         [HttpGet("{id}")]
@@ -38,44 +38,44 @@ namespace rest_with_asp_net_10.Controller
         {
             _logger.LogInformation("Getting person with ID {id}.", id);
 
-            Person? person = _service.GetById(id);
+            PersonDTO? personDTO = _service.GetById(id);
 
-            if (person is null)
+            if (personDTO is null)
             {
                 _logger.LogWarning("Person with ID {id} not found.", id);
                 return NotFound();
             }
 
-            return Ok(person);
+            return Ok(personDTO);
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody] Person person)
+        public IActionResult Create([FromBody] PersonDTO personDTO)
         {
-            _logger.LogInformation("Creating new person with name {firstName}.", person.FirstName);
+            _logger.LogInformation("Creating new person with name {firstName}.", personDTO.FirstName);
 
-            if (person is null)
+            if (personDTO is null)
             {
                 _logger.LogError("Failed to create person.");
                 return BadRequest();
             }
 
-            Person personCreated = _service.Create(person);
-            return Ok(personCreated);
+            PersonDTO personDTOCreated = _service.Create(personDTO);
+            return Ok(personDTOCreated);
         }
 
         [HttpPut]
-        public IActionResult Update([FromBody] Person person)
+        public IActionResult Update([FromBody] PersonDTO personDTO)
         {
-            _logger.LogInformation("Updating person with ID {id}", person.Id);
+            _logger.LogInformation("Updating person with ID {id}", personDTO.Id);
 
-            if (person is null)
+            if (personDTO is null)
             {
                 _logger.LogError("Failed to update person.");
                 return BadRequest();
             }
 
-            Person? personUpdate = _service.Update(person);
+            PersonDTO? personUpdate = _service.Update(personDTO);
 
             if (personUpdate is null)
             {
@@ -91,9 +91,9 @@ namespace rest_with_asp_net_10.Controller
         {
             _logger.LogInformation("Deleting person with ID {id}", id);
 
-            Person? person = _service.GetById(id);
+            PersonDTO? personDTO = _service.GetById(id);
 
-            if (person is null)
+            if (personDTO is null)
             {
                 _logger.LogError("Failed to delete person with ID {id}", id);
                 return NotFound();

@@ -1,16 +1,16 @@
-﻿using rest_with_asp_net_10.Domain;
+﻿using rest_with_asp_net_10.DTOs;
 
 namespace rest_with_asp_net_10.Service
 {
     public interface IPersonService
     {
-        List<Person> GetAll();
+        IEnumerable<PersonDTO> GetAll();
 
-        Person GetById(int id);
+        PersonDTO GetById(int id);
 
-        Person Create(Person person);
+        PersonDTO Create(PersonDTO personDTO);
 
-        Person Update(Person person);
+        PersonDTO Update(PersonDTO personDTO);
 
         void Delete(int id);
     }

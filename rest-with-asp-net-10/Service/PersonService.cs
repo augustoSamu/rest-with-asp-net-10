@@ -1,4 +1,6 @@
 ﻿using rest_with_asp_net_10.Domain;
+using rest_with_asp_net_10.DTOs;
+using rest_with_asp_net_10.DTOs.Mappings;
 using rest_with_asp_net_10.Repository;
 
 namespace rest_with_asp_net_10.Service
@@ -12,24 +14,30 @@ namespace rest_with_asp_net_10.Service
             _repository = repository;
         }
 
-        public List<Person> GetAll()
+        public IEnumerable<PersonDTO> GetAll()
         {
-            return _repository.GetAll();
+            IEnumerable<Person> persons = _repository.GetAll();
+            return persons.ToPersonDTOList();
         }
 
-        public Person GetById(int id)
+        public PersonDTO GetById(int id)
         {
-            return _repository.GetById(id);
+            Person person = _repository.GetById(id);
+            return person.ToPersonDTO(); ;
         }
 
-        public Person Create(Person person)
+        public PersonDTO Create(PersonDTO personDTO)
         {
-            return _repository.Create(person);
+            Person? person = personDTO.ToPerson();
+            Person createdPerson = _repository.Create(person);
+            return createdPerson.ToPersonDTO();
         }
 
-        public Person Update(Person person)
+        public PersonDTO Update(PersonDTO personDTO)
         {
-            return _repository.Update(person);
+            Person? person = personDTO.ToPerson();
+            Person updatedPerson = _repository.Update(person);
+            return updatedPerson.ToPersonDTO();
         }
 
         public void Delete(int id)

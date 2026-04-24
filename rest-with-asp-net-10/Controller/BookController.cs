@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using rest_with_asp_net_10.Domain;
+using rest_with_asp_net_10.DTOs;
 using rest_with_asp_net_10.Service;
 
 namespace rest_with_asp_net_10.Controller
@@ -22,15 +22,15 @@ namespace rest_with_asp_net_10.Controller
         {
             _logger.LogInformation("Getting all books.");
 
-            List<Book> books = _service.GetAll();
+            IEnumerable<BookDTO> booksDTO = _service.GetAll();
 
-            if (!books.Any())
+            if (!booksDTO.Any())
             {
                 _logger.LogInformation("No books found.");
                 return NoContent();
             }
 
-            return Ok(books);
+            return Ok(booksDTO);
         }
 
         [HttpGet("{id}")]
@@ -38,52 +38,52 @@ namespace rest_with_asp_net_10.Controller
         {
             _logger.LogInformation("Getting book with ID {id}.", id);
 
-            Book? book = _service.GetById(id);
+            BookDTO? bookDTO = _service.GetById(id);
 
-            if (book is null)
+            if (bookDTO is null)
             {
                 _logger.LogWarning("Book with ID {id} not found.", id);
                 return NotFound();
             }
 
-            return Ok(book);
+            return Ok(bookDTO);
         }
 
         [HttpPost]
-        public IActionResult Create([FromBody] Book book)
+        public IActionResult Create([FromBody] BookDTO bookDTO)
         {
-            _logger.LogInformation("Creating new book with title {title}", book.Title);
+            _logger.LogInformation("Creating new book with title {title}", bookDTO.Title);
 
-            if (book is null)
+            if (bookDTO is null)
             {
                 _logger.LogError("Failed to create book.");
                 return BadRequest();
             }
 
-            var bookCreated = _service.Create(book);
-            return Ok(bookCreated);
+            var bookDTOCreated = _service.Create(bookDTO);
+            return Ok(bookDTOCreated);
         }
 
         [HttpPut]
-        public IActionResult Update([FromBody] Book book)
+        public IActionResult Update([FromBody] BookDTO bookDTO)
         {
-            _logger.LogInformation("Updating book with ID {id}.", book.Id);
+            _logger.LogInformation("Updating book with ID {id}.", bookDTO.Id);
 
-            if (book is null)
+            if (bookDTO is null)
             {
                 _logger.LogError("Failed to update book.");
                 return BadRequest();
             }
 
-            var bookUpdated = _service.Update(book);
+            var bookDTOUpdated = _service.Update(bookDTO);
 
-            if (bookUpdated is null)
+            if (bookDTOUpdated is null)
             {
                 _logger.LogError("Failed to found book.");
                 return NotFound();
             }
 
-            return Ok(bookUpdated);
+            return Ok(bookDTOUpdated);
         }
 
         [HttpDelete("{id}")]
@@ -91,7 +91,7 @@ namespace rest_with_asp_net_10.Controller
         {
             _logger.LogInformation("Deleting book with ID {id}", id);
 
-            Book? book = _service.GetById(id);
+            BookDTO? book = _service.GetById(id);
 
             if (book is null)
             {

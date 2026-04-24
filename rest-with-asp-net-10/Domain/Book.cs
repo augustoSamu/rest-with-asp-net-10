@@ -13,11 +13,11 @@ namespace rest_with_asp_net_10.Domain
 
         [Required]
         [Column("title", TypeName = "varchar(MAX)")]
-        public string Title { get; set; }
+        public string? Title { get; set; }
 
         [Required]
         [Column("author", TypeName = "varchar(MAX)")]
-        public string Author { get; set; }
+        public string? Author { get; set; }
 
         [Required]
         [Column("price", TypeName = "decimal(18,2)")]

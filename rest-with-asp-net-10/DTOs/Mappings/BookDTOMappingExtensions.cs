@@ -37,7 +37,7 @@ namespace rest_with_asp_net_10.DTOs.Mappings
         public static IEnumerable<BookDTO>? ToBookDTOList(this IEnumerable<Book> books)
         {
             if (books is null || !books.Any())
-                return null;
+                return new List<BookDTO>();
 
             return books.Select(b => new BookDTO()
             {

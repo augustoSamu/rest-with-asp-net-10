@@ -1,4 +1,6 @@
 ﻿using rest_with_asp_net_10.Domain;
+using rest_with_asp_net_10.DTOs;
+using rest_with_asp_net_10.DTOs.Mappings;
 using rest_with_asp_net_10.Repository;
 
 namespace rest_with_asp_net_10.Service
@@ -11,24 +13,31 @@ namespace rest_with_asp_net_10.Service
         {
             _repository = repository;
         }
-        public List<Book> GetAll()
+
+        public IEnumerable<BookDTO> GetAll()
         {
-            return _repository.GetAll();
+            IEnumerable<Book> books = _repository.GetAll();
+            return books.ToBookDTOList();
         }
 
-        public Book GetById(int id)
+        public BookDTO GetById(int id)
         {
-            return _repository.GetById(id);
+            Book book = _repository.GetById(id);
+            return book.ToBookDTO();
         }
 
-        public Book Create(Book book)
+        public BookDTO Create(BookDTO bookDTO)
         {
-            return _repository.Create(book);
+            Book? book = bookDTO.ToBook();
+            Book createdBook = _repository.Create(book);
+            return createdBook.ToBookDTO();
         }
 
-        public Book Update(Book book)
+        public BookDTO Update(BookDTO bookDTO)
         {
-            return _repository.Update(book);
+            Book? book = bookDTO.ToBook();
+            Book updatedBook = _repository.Update(book);
+            return updatedBook.ToBookDTO();
         }
 
         public void Delete(int id)

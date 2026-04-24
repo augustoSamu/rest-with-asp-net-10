@@ -1,16 +1,16 @@
-﻿using rest_with_asp_net_10.Domain;
+﻿using rest_with_asp_net_10.DTOs;
 
 namespace rest_with_asp_net_10.Service
 {
     public interface IBookService
     {
-        List<Book> GetAll();
+        IEnumerable<BookDTO> GetAll();
         
-        Book GetById(int id);
+        BookDTO GetById(int id);
         
-        Book Create(Book book);
+        BookDTO Create(BookDTO book);
         
-        Book Update(Book book);
+        BookDTO Update(BookDTO book);
         
         void Delete(int it);
     }

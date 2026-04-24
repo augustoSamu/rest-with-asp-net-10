@@ -28,14 +28,14 @@ namespace rest_with_asp_net_10.DTOs.Mappings
                 Id = personDTO.Id,
                 FirstName = personDTO.FirstName,
                 LastName = personDTO.LastName,
-                Address = personDTO.Address
+                Address = personDTO.Address,
             };
         }
 
         public static IEnumerable<PersonDTO>? ToPersonDTOList(this IEnumerable<Person> persons)
         {
             if (persons is null || !persons.Any())
-                return null;
+                return new List<PersonDTO>();
 
             return persons.Select(p => new PersonDTO()
             {
