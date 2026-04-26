@@ -1,4 +1,4 @@
-﻿namespace rest_with_asp_net_10.DTOs
+﻿namespace rest_with_asp_net_10.DTOs.V1
 {
     public class PersonDTO
     {

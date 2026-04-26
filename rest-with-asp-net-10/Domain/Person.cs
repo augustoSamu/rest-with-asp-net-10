@@ -30,5 +30,8 @@ namespace rest_with_asp_net_10.Domain
         [Column("gender", TypeName = "varchar(6)")]
         [MaxLength(6)]
         public string? Gender { get; set; }
+
+        //[NotMapped]
+        //public DateTime? BirthDay { get; set; }
     }
 }

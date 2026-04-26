@@ -1,4 +1,5 @@
 ﻿using rest_with_asp_net_10.Domain;
+using rest_with_asp_net_10.DTOs.V1;
 
 namespace rest_with_asp_net_10.DTOs.Mappings
 {

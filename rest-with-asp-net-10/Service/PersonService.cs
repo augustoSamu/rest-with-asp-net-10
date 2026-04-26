@@ -1,6 +1,6 @@
 ﻿using rest_with_asp_net_10.Domain;
-using rest_with_asp_net_10.DTOs;
 using rest_with_asp_net_10.DTOs.Mappings;
+using rest_with_asp_net_10.DTOs.V1;
 using rest_with_asp_net_10.Repository;
 
 namespace rest_with_asp_net_10.Service

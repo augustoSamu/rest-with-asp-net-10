@@ -1,4 +1,4 @@
-﻿using rest_with_asp_net_10.DTOs;
+﻿using rest_with_asp_net_10.DTOs.V1;
 
 namespace rest_with_asp_net_10.Service
 {
