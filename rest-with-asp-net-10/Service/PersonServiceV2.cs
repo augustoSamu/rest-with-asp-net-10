@@ -1,5 +1,5 @@
 ﻿using rest_with_asp_net_10.Domain;
-using rest_with_asp_net_10.DTOs.Mappings;
+using rest_with_asp_net_10.DTOs.Mappings.V2;
 using rest_with_asp_net_10.DTOs.V2;
 using rest_with_asp_net_10.Repository;
 
