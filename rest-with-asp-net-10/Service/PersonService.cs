@@ -17,7 +17,7 @@ namespace rest_with_asp_net_10.Service
         public IEnumerable<PersonDTO> GetAll()
         {
             IEnumerable<Person> persons = _repository.GetAll();
-            return persons.ToPersonDTOList();
+            return (IEnumerable<PersonDTO>)persons.ToPersonDTOList();
         }
 
         public PersonDTO GetById(int id)

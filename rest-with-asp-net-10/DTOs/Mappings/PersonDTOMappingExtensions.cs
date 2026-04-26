@@ -1,5 +1,5 @@
 ﻿using rest_with_asp_net_10.Domain;
-using rest_with_asp_net_10.DTOs.V1;
+using rest_with_asp_net_10.DTOs.V2;
 
 namespace rest_with_asp_net_10.DTOs.Mappings
 {
@@ -16,7 +16,9 @@ namespace rest_with_asp_net_10.DTOs.Mappings
                 FirstName = person.FirstName,
                 LastName = person.LastName,
                 Address = person.Address,
-                Gender = person.Gender
+                Gender = person.Gender,
+                BirthDay = DateTime.Now
+                //BirthDay = person.BirthDay ?? DateTime.Now
             };
         }
 
@@ -31,7 +33,8 @@ namespace rest_with_asp_net_10.DTOs.Mappings
                 FirstName = personDTO.FirstName,
                 LastName = personDTO.LastName,
                 Address = personDTO.Address,
-                Gender = personDTO.Gender
+                Gender = personDTO.Gender,
+                //BirthDay = personDTO.BirthDay
             };
         }
 
@@ -46,7 +49,9 @@ namespace rest_with_asp_net_10.DTOs.Mappings
                 FirstName = p.FirstName,
                 LastName = p.LastName,
                 Address = p.Address,
-                Gender = p.Gender
+                Gender = p.Gender,
+                BirthDay = DateTime.Now
+                //BirthDay = p.BirthDay
             }).ToList();
         }
     }

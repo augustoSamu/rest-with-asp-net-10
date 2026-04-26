@@ -2,7 +2,7 @@
 using rest_with_asp_net_10.DTOs.V1;
 using rest_with_asp_net_10.Service;
 
-namespace rest_with_asp_net_10.Controller
+namespace rest_with_asp_net_10.Controller.V1
 {
     [ApiController]
     [Route("[controller]/v1")]
@@ -61,6 +61,9 @@ namespace rest_with_asp_net_10.Controller
             }
 
             PersonDTO personDTOCreated = _service.Create(personDTO);
+
+            Response.Headers.Add("X-API-Deprecated", "true");
+            Response.Headers.Add("X-API-Deprecation-Date", "2026-04-26");
             return Ok(personDTOCreated);
         }
 

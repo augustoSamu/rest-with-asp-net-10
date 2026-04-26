@@ -13,6 +13,7 @@ builder.Services.AddEvolveCondiguration(builder.Configuration, builder.Environme
 
 builder.Services.AddScoped<IPersonService, PersonService>();
 builder.Services.AddScoped<IBookService, BookService>();
+builder.Services.AddScoped<PersonServiceV2>();
 
 builder.Services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
 
