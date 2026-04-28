@@ -1,3 +1,4 @@
 <Solution>
+  <Project Path="rest-with-asp-net-10.Tests/rest-with-asp-net-10.Tests.csproj" Id="2b4362da-d31d-4880-879e-b80c055f6837" />
   <Project Path="rest-with-asp-net-10/rest-with-asp-net-10.csproj" />
 </Solution>
