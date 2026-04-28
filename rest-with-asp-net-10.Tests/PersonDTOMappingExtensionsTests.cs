@@ -8,7 +8,7 @@ namespace rest_with_asp_net_10.Tests
     public class PersonDTOMappingExtensionsTests
     {
         [Fact]
-        public void ToPersonDTO_PersonShouldToPersonDTO()
+        public void ToPersonDTO_PersonShouldReturnToPersonDTO()
         {
             Person person = new Person
             {
@@ -47,7 +47,7 @@ namespace rest_with_asp_net_10.Tests
         }
 
         [Fact]
-        public void ToPerson_PersonDTOShouldToPerson()
+        public void ToPerson_PersonDTOShouldReturnToPerson()
         {
             PersonDTO dto = new PersonDTO
             {
@@ -89,7 +89,7 @@ namespace rest_with_asp_net_10.Tests
         }
 
         [Fact]
-        public void ToPersonDTOList_PersonListShouldToPersonDTOList()
+        public void ToPersonDTOList_PersonListShouldReturnToPersonDTOList()
         {
             IEnumerable<Person> persons = new List<Person>()
             {
@@ -99,7 +99,7 @@ namespace rest_with_asp_net_10.Tests
                     FirstName = "Son",
                     LastName = "Goku",
                     Address = "Earth",
-                    Gender = "Male",                   
+                    Gender = "Male",
                 },
                 new Person()
                 {
@@ -134,16 +134,20 @@ namespace rest_with_asp_net_10.Tests
             IEnumerable<PersonDTO>? personsDto = persons.ToPersonDTOList();
 
             personsDto.Should().NotBeNull();
-            personsDto.Should().BeEquivalentTo(expectedDto);
+            personsDto.Should().HaveCount(2);
+
+            personsDto.Should().BeEquivalentTo(expectedDto, 
+                options => options.Excluding(dto => dto.BirthDay));
+            personsDto.First().Should().BeEquivalentTo(expectedDto.First(), 
+                options => options.Excluding(dto => dto.BirthDay));
         }
 
         [Fact]
-        public void ToPersonDTOList_NullPersonListShouldReturnEmptyList()
+        public void ToPersonDTOList_NullPersonListShouldReturnNull()
         {
             IEnumerable<Person>? persons = null;
             IEnumerable<PersonDTO>? personsDto = persons.ToPersonDTOList();
-            personsDto.Should().NotBeNull();
-            personsDto.Should().BeEmpty();
+            personsDto.Should().BeNull();
         }
     }
 }

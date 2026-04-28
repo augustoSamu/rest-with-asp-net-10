@@ -41,7 +41,7 @@ namespace rest_with_asp_net_10.DTOs.Mappings.V2
         public static IEnumerable<PersonDTO>? ToPersonDTOList(this IEnumerable<Person> persons)
         {
             if (persons is null || !persons.Any())
-                return new List<PersonDTO>();
+                return null;
 
             return persons.Select(p => new PersonDTO()
             {
