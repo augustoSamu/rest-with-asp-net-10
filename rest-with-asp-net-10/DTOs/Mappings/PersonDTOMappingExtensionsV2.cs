@@ -50,7 +50,7 @@ namespace rest_with_asp_net_10.DTOs.Mappings.V2
                 LastName = p.LastName,
                 Address = p.Address,
                 Gender = p.Gender,
-                BirthDay = DateTime.Now
+                //BirthDay = DateTime.Now
                 //BirthDay = p.BirthDay
             }).ToList();
         }
