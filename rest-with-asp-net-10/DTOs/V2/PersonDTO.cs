@@ -1,7 +1,4 @@
-﻿using rest_with_asp_net_10.JsonSerialization;
-using System.Text.Json.Serialization;
-
-namespace rest_with_asp_net_10.DTOs.V2
+﻿namespace rest_with_asp_net_10.DTOs.V2
 {
     public class PersonDTO
     {
@@ -20,11 +17,22 @@ namespace rest_with_asp_net_10.DTOs.V2
         //[JsonPropertyOrder(1)]
         public string Address { get; set; }
 
-        [JsonConverter(typeof(GenderSerializer))]
+        //[JsonConverter(typeof(GenderSerializer))]
+        //[JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public string Gender { get; set; }
 
         //[JsonPropertyOrder(2)]
-        [JsonConverter(typeof(DateSerializer))]
+        //[JsonConverter(typeof(DateSerializer))]
+        //[JsonIgnore]
         public DateTime? BirthDay { get; set; }
+
+        //[JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        //public int? Age { get; set; }
+
+        //[JsonIgnore]
+        //public bool IsAdult => Age >= 18;
+
+        //[JsonIgnore]
+        //public DateTime CreatedAt { get; set; } = DateTime.Now;
     }
 }
