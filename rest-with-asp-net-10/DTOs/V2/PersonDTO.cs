@@ -20,6 +20,7 @@ namespace rest_with_asp_net_10.DTOs.V2
         //[JsonPropertyOrder(1)]
         public string Address { get; set; }
 
+        [JsonConverter(typeof(GenderSerializer))]
         public string Gender { get; set; }
 
         //[JsonPropertyOrder(2)]
