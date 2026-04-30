@@ -6,7 +6,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.AddLoggingConfiguration();
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddContentNegotiation();
 
 builder.Services.AddDatabaseConfiguration(builder.Configuration);
 builder.Services.AddEvolveCondiguration(builder.Configuration, builder.Environment);
