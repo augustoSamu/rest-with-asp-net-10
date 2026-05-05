@@ -9,6 +9,9 @@ builder.AddLoggingConfiguration();
 builder.Services.AddControllers()
     .AddContentNegotiation();
 
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddOpenApiConfig();
+
 builder.Services.AddDatabaseConfiguration(builder.Configuration);
 builder.Services.AddEvolveCondiguration(builder.Configuration, builder.Environment);
 
