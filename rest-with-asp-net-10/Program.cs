@@ -11,6 +11,7 @@ builder.Services.AddControllers()
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddOpenApiConfig();
+builder.Services.AddSwaggerConfig();
 
 builder.Services.AddDatabaseConfiguration(builder.Configuration);
 builder.Services.AddEvolveCondiguration(builder.Configuration, builder.Environment);
@@ -28,5 +29,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.UseSwaggerSpecification();
 
 app.Run();
