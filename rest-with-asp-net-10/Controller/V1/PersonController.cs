@@ -18,6 +18,9 @@ namespace rest_with_asp_net_10.Controller.V1
         }
 
         [HttpGet]
+        [ProducesResponseType(200, Type = typeof(List<PersonDTO>))]
+        [ProducesResponseType(204)]
+        [ProducesResponseType(401)]
         public IActionResult GetAll()
         {
             _logger.LogInformation("Getting all persons.");
@@ -34,6 +37,9 @@ namespace rest_with_asp_net_10.Controller.V1
         }
 
         [HttpGet("{id}")]
+        [ProducesResponseType(200, Type = typeof(PersonDTO))]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(404)]
         public IActionResult GetById(int id)
         {
             _logger.LogInformation("Getting person with ID {id}.", id);
@@ -50,6 +56,9 @@ namespace rest_with_asp_net_10.Controller.V1
         }
 
         [HttpPost]
+        [ProducesResponseType(200, Type = typeof(PersonDTO))]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
         public IActionResult Create([FromBody] PersonDTO personDTO)
         {
             _logger.LogInformation("Creating new person with name {firstName}.", personDTO.FirstName);
@@ -68,6 +77,10 @@ namespace rest_with_asp_net_10.Controller.V1
         }
 
         [HttpPut]
+        [ProducesResponseType(200, Type = typeof(PersonDTO))]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(404)]
         public IActionResult Update([FromBody] PersonDTO personDTO)
         {
             _logger.LogInformation("Updating person with ID {id}", personDTO.Id);
@@ -90,6 +103,9 @@ namespace rest_with_asp_net_10.Controller.V1
         }
 
         [HttpDelete("{id}")]
+        [ProducesResponseType(204, Type = typeof(PersonDTO))]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(404)]
         public IActionResult Delete(int id)
         {
             _logger.LogInformation("Deleting person with ID {id}", id);

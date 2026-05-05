@@ -12,6 +12,7 @@ builder.Services.AddControllers()
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddOpenApiConfig();
 builder.Services.AddSwaggerConfig();
+builder.Services.AddRouteConfig();
 
 builder.Services.AddDatabaseConfiguration(builder.Configuration);
 builder.Services.AddEvolveCondiguration(builder.Configuration, builder.Environment);
