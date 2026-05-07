@@ -35,7 +35,7 @@ namespace rest_with_asp_net_10.Configuration
             return services;
         }
 
-        public static IApplicationBuilder UseSwaggerSpecification(this IApplicationBuilder app)
+        public static IApplicationBuilder UseSwaggerConfiguration(this IApplicationBuilder app)
         {
             app.UseSwagger();
             app.UseSwaggerUI(options =>
